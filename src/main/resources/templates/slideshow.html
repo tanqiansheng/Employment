@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('头部')"/>
+    <link th:href="@{/css/home.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<!--轮播 start-->
+<div  style="height: 400px;">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" id="olnum">
+            <!--填充到这里-->
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" id="lunbotu">
+            <!--填充到这里-->
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<!--轮播 end-->
+<script type="text/javascript">
+    $(function() {
+        var baseurl =  ctx + "employment/slideshow";
+        var id = 7;
+        var url = baseurl + "/listNoPer";
+        $.post(url, function(data) {
+            var rows = data.rows;
+            //首先清空已有数据
+            $("#lunbotu").empty();
+            $("#olnum").empty();
+            //填充轮播图数
+            for(var i=0;i<rows.length; i++){
+                if(i == 0){
+                    $("#olnum").append("<li data-target='#carousel-example-generic' data-slide-to='0'  class='active'></li>")
+                }else{
+                    $("#olnum").append("<li data-target='#carousel-example-generic' data-slide-to='"+i+"'></li>")
+                }
+            }
+            //填充每幅图像的具体信息
+            for(var i = 0; i < rows.length; i++) {
+                if(i == 0) {
+                    $("#lunbotu").append("<div class='item active'>" +
+                        "<img src='" + rows[i].filePath + "' alt=''  style=\"height: 400px;width: 100%\" >" +
+                        "<div class='carousel-caption'>" +
+                       /* "<p> " + rows[i].fileName + "</p>" +*/
+                        "</div>" +
+                        "</div>");
+                } else {
+                    $("#lunbotu").append("<div class='item'>" +
+                        "<img src='" + rows[i].filePath + "' alt='' style=\"height: 400px;width: 100%\" >" +
+                        "<div class='carousel-caption'>" +
+                      /*  "<p> " + rows[i].fileName + "</p>" +*/
+                        "</div>" +
+                        "</div>");
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

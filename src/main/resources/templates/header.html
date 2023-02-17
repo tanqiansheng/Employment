@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('头部')"/>
+    <link th:href="@{/css/home.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="header" id="header"  th:fragment="header">
+    <div class="headerView" style="margin-top: 10px">
+        <div class="logo" id="logo">
+            <a href="http://www.cswu.cn/"><img src="/img/logo.png" width="100%"/></a>
+        </div>
+        <div class="headerTitle">
+            <h1>就业指导中心</h1>
+        </div>
+        <div class="mainNav">
+            <ul id="nav" class="nav">
+                <li class="nLi">
+                    <h3 style="background: none"><a class="home" href="home">首页</a></h3>
+                </li>
+                <li class="nLi">
+                    <h3><a class="news" href="news">就业新闻</a></h3>
+                </li>
+                <li class="nLi">
+                    <h3><a href="information">招聘信息</a></h3>
+                </li>
+                <li class="nLi">
+                    <h3><a href="skill">求职技巧</a></h3>
+                </li>
+                <li class="nLi">
+                    <h3><a href="policy">就业政策</a></h3>
+                </li>
+                <li class="nLi">
+                    <h3><a href="link">友情链接</a></h3>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+</body>
+</html>

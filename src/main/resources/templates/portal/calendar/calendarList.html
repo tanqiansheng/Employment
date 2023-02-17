@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('就业日历')"/>
+    <link th:href="@{/css/home.css}" rel="stylesheet"/>
+</head>
+<body>
+<!--head start-->
+<th:block th:include="header"/>
+<!--head end-->
+<!--轮播 start-->
+<th:block th:include="slideshow"/>
+<!--轮播 end-->
+<!--内容第一行 start-->
+<div class="warp_n">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="title">
+                <span style="font-size: 20px;color: #0A4587">日历</span>
+            </div>
+            <div class="sd-body">
+                <ul>
+                    <li><a href="calendar">就业日历</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="title">
+                <span>当前位置：<a href="/home">首页</a>  >  <a  href="/calendar" οnclick="location.reload()">就业日历</a></span>
+            </div>
+            <div class=" select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容第一行 end-->
+<!--footer start-->
+<th:block th:include="footer"/>
+<!--footer end-->
+
+<script type="text/javascript">
+    $(function () {
+        var options = {
+            url: "/calendarList",
+            modalName: "就业日历",
+            showHeader: true,
+            showToggle: false,
+            showRefresh: true,
+            showColumns: false,
+            showSearch: false,
+            striped: false,
+            useRollOver:true,
+            halign: 'center',
+            columns: [
+                {
+                    field: 'title',
+                    title: '单位名称',
+                    width: '300px',
+                    formatter: function (value, row, index) {
+                        return "<img src='/img/ico-1.jpg' style='margin-right: 10px'>" + "<a  href='showCalendar?id= " + row.id + "' >" + value + "</a>";
+                    }
+                },
+                {
+                    field: 'place',
+                    title: '地点',
+                    width: '130px',
+                    align: 'center',
+                },
+                {
+                    field: 'jobFair',
+                    title: '招聘会类型',
+                    width: '130px',
+                    align: 'center',
+                },
+                {
+                    field: 'recruitTime',
+                    title: '招聘会时间',
+                    width: '150px',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if(value){
+                            return   value.substring(0, 16) ;
+                        }
+                        else
+                            return  value ;
+
+                    }
+
+                },
+                {
+                    field: 'visitTimes',
+                    title: '点击量',
+                    width: '100px',
+                    align: 'center',
+                },]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

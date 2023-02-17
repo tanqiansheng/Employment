@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('轮播图列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li class="select-time">
+                                <label>发布时间：</label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginReleaseTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endReleaseTime]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                        class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                        class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add()" shiro:hasPermission="employment:slideshow:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="employment:slideshow:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('employment:slideshow:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('employment:slideshow:remove')}]];
+        var prefix = ctx + "employment/slideshow";
+        var datas = [[${@dict.getType('sys_notice_status')}]];
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "轮播图",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'fileId',
+                    title: 'ID',
+                    visible: false
+                },
+                {
+                    field: 'filePath',
+                    title: '图片路径'
+                },
+                    {
+                        field: 'fileName',
+                        title: '图片名称',
+                        formatter: function (value, row, index) {
+                            row.fileName = "<a href='#' onclick='showContent(" + row.fileId + ")'>预览图片</a>";
+                            return row.fileName;
+                        }
+
+                    },
+                {
+                    field: 'releasePeople',
+                    title: '发布人'
+                },
+                {
+                    field: 'releaseTime',
+                    title: '发布时间',
+                    formatter: function (value, row, index) {
+                        return value.substring(0, 10);
+                    }
+                },
+                {
+                    field: 'status',
+                    title: '状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.fileId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        function add() {
+            var url = prefix + '/add/';
+            $.modal.open("新增首页轮播", url, "800", "300");
+        }
+
+        function edit(id) {
+            var url = prefix + '/edit/' + id;
+            $.modal.open("修改首页轮播", url, "800", "300");
+        }
+
+        function showContent(id) {
+            layer.open({
+                type: 2,
+                title: '查看图片',
+                maxmin: true,
+                shadeClose: false, // 点击遮罩关闭层
+                area: ['1040px', '800px'],
+                content: prefix + '/showContent?id=' + id
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('内容预览')"/>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <label class="col-sm-1">标题：</label>
+                    <div class="col-sm-11">
+                        <span th:text="${link.title}"></span>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div > <a th:href="${link.content}" th:utext="${link.content}" target="_blank"> </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('就业指导中心')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
+    <link th:href="@{/css/home.css}" rel="stylesheet"/>
+</head>
+<body>
+<th:block th:include="header"/>
+<!--轮播 start-->
+<th:block th:include="slideshow"/>
+<!--轮播 end-->
+
+<!--内容第一行 start-->
+<div class="warp">
+    <div class="index_home_news">
+        <div class="title">
+            <h1>就业新闻</h1>
+            <span><a class="news" >more</a></span>
+        </div>
+        <div class="index_news_con">
+            <ul>
+                <ul>
+                    <li th:each="news : ${newsList}">
+                        <a th:href="'showNews?id='+${news.id}" th:text="${news.title}" th:title="${news.title}"></a>
+                        <span th:text="${#dates.format(news.releaseTime, 'yyyy-MM-dd')}"></span>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <div class="index_home_news" style="margin-left: 60px">
+        <div class="title">
+            <h1>招聘信息</h1>
+            <span><a href="information" >more </a></span>
+        </div>
+        <div class="index_news_con">
+            <ul id="jyxx">
+                <li th:each="information : ${informationList}">
+                    <a th:href="'showInformation?id='+${information.id}" th:text="${information.title}"></a>
+                    <span th:text="${#dates.format(information.releaseTime, 'yyyy-MM-dd')}"></span>                        </dl>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="index_home_news">
+        <div class="title">
+            <h1>通知公告</h1>
+            <span><a href="announcement">more </a></span>
+        </div>
+        <div class="index_news_con">
+            <ul id="tzgg">
+                <ul>
+                    <li th:each="announcement : ${announcementList}">
+                        <a th:href="'showAnnouncement?id='+${announcement.id}" th:text="${announcement.title}"></a>
+                        <span th:text="${#dates.format(announcement.releaseTime, 'yyyy-MM-dd')}"></span>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <div class="index_home_news" style="margin-left: 60px">
+        <div class="title">
+            <h1>就业政策</h1>
+            <span><a href="policy" >more</a></span>
+        </div>
+        <div class="index_news_con">
+            <ul id="jyzc">
+                <li th:each="policy : ${policyList}">
+                    <div th:if="${policy.src==null||policy.src==''}">
+                        <a th:href="'showPolicy?id='+${policy.id}" th:text="${policy.title}"></a>
+                        <span th:text="${#dates.format(policy.releaseTime, 'yyyy-MM-dd')}"></span>
+                    </div>
+                    <div th:if="${policy.content==null||policy.content==''}">
+                        <a target="_blank" th:href="${policy.src}" th:text="${policy.title}"></a>
+                        <span th:text="${#dates.format(policy.releaseTime, 'yyyy-MM-dd')}"></span>
+                    </div>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="index_home_news">
+        <div class="title">
+            <h1>友情链接</h1>
+            <span><a href="link">more</a></span>
+        </div>
+        <div class="index_news_con">
+            <ul id="yqlj">
+                <li th:each="link : ${linkList}">
+                    <a th:href="${link.content}" th:text="${link.title}" target="_blank"></a>
+                    <span th:text="${#dates.format(link.releaseTime, 'yyyy-MM-dd')}"></span>                        </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="index_home_date" style="margin-left: 60px">
+        <div class="title">
+            <h1>就业日历</h1>
+            <span><a href="calendar" >more</a></span>
+        </div>
+        <div class="index_date_con">
+            <div class="layui-inline" id="test-n1"></div>
+        </div>
+    </div>
+</div>
+<th:block th:include="footer"/>
+<!--footer end-->
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<script type="text/javascript">
+    $('.home').attr("href", ctx + "home");
+    $('.news').attr("href", ctx + "news");
+    function dateToStringForLayui(dateObj) {
+        var FullYear = dateObj.year;
+        var Month = dateObj.month;
+        var Day = dateObj.date;
+        var Hours = dateObj.hours;
+        var Minutes = dateObj.minutes;
+        var Seconds = dateObj.seconds;
+        return FullYear + "-" + Month + "-" + Day + " " + Hours + ":" + Minutes + ":" + Seconds
+    }
+    var marks=null;
+    $.ajax({
+        url: "/employment/calendar/listNoPageAttr",
+        type: "POST",
+        async: false,
+        success: function(data) {
+            var mstr = JSON.stringify(data);
+            var josnstr = JSON.parse(mstr);
+            marks = josnstr;
+
+    }});
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var options = {
+            elem: '#test-n1'
+            , range: true //或 range: '~' 来自定义分割字符
+            , format: 'yyyy年MM月dd日' //可任意组合 yyyy年MM月dd日 HH时mm分ss秒===2017年08月18日 20时08分08秒
+            , trigger: 'click' // 自定义弹出控件的事件(类型：String，默认值：focus，如果绑定的元素非输入框，则默认事件为：click)-采用click弹出
+            , show: true //默认显示-类型：Boolean，默认值：false;;;;如果设置: true，则控件默认显示在绑定元素的区域。通常用于外部事件调用控件
+            , position: 'static'//类型：String，默认值：absolute  (fixed,absolute,static)
+            , showBottom: false//是否显示底部栏--类型：Boolean，默认值：true如果设置 false，将不会显示控件的底部栏区域
+            , btns: ['clear', 'now', 'confirm']//类型：Array，默认值：['clear', 'now', 'confirm'](显示清空，今天，确认)
+            , theme: '#0A4587'//主题-类型：String，默认值：default，theme的可选值有：default（默认简约）、molv（墨绿背景）、#颜色值（自定义颜色背景）、grid（格子主题）
+            , calendar: true//是否显示公历节日--类型：Boolean，默认值：false
+            , mark: marks
+            , ready: function (date) {//控件在打开时触发，回调返回一个参数
+            }
+            , change: function (value, date, endDate) {//日期时间被切换后的回调
+            }
+            ,
+            change: function (value, date) { //监听日期被切换
+               /* ins1.hint(value); //在控件上弹出value值*/
+            }
+            , done: function (value, date) {
+                $.post("/employment/calendar/listNoPage", null, function (data) {
+                    data.forEach(function (item) {
+                        var recruitTime = new Date(item.recruitTime);
+                        if (date.year === recruitTime.getFullYear() && date.month === recruitTime.getMonth() + 1 && date.date === recruitTime.getDate()) { //点击2017年8月15日，弹出提示语
+                            ins1.hint(item.title);
+                            ins1.hint("<a target=\"_blank\" href='showCalendar?id= " + item.id + "' style='color: #1ab394'  >" + item.title + "</a>");
+                        }
+                    });
+                });
+
+            }
+        };
+        var ins1 = laydate.render(options);
+
+    });
+
+
+</script>
+</body>
+</html>

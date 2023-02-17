@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="RuoYi:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>RuoYi</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="employee.war">
+      <element id="artifact" artifact-name="RuoYi:war exploded" />
+    </root>
+  </artifact>
+</component>

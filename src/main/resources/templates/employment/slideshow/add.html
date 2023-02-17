@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('新增轮播图')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <h1 style="text-align: center">请选择图片</h1>
+    <form class="form-horizontal m" id="form-slideshow-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">图片：</label>
+            <div class="col-sm-8">
+                <input id="filePath" name="filePath" class="form-control" type="file">
+            </div>
+        </div>
+
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<script type="text/javascript">
+    var prefix = ctx + "employment/slideshow"
+    $("#form-slideshow-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-slideshow-add').serialize());
+        }
+    }
+
+    $("input[name='releaseTime']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            uploadFile();
+        }
+    }
+
+    //判断是否是图片类型
+    function isImg(str) {
+        if (str.search("[.]+(jpg|jpeg|swf|gif|png|JPG|JPEG|SWF|GIF|PNG)$")) {
+            return false;
+        }
+        return true;
+    }
+
+    // 截取url后面的文件类型
+    function getUploadUrlSuffix(urlStr) {
+        var url = urlStr.substring(urlStr.lastIndexOf("\."), urlStr.length);
+        return url;
+    }
+
+    function uploadFile() {
+        var formData = new FormData();
+        var path = $('#filePath')[0].files[0];
+        if (path == null) {
+            $.modal.alertWarning("请先选择图片路径");
+            return false;
+        }
+        //获取图片格式
+        var type=getUploadUrlSuffix(path.name);
+        //判断是否是图片格式
+        if(!isImg(type)){
+            $.modal.alertWarning("请选择正确的图片格式！");
+            return false;
+        }
+
+        formData.append('fileName', $("#fileName").val());
+        formData.append('file',path);
+        $.ajax({
+            url: prefix + "/add",
+            type: 'post',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (result) {
+                $.operate.successCallback(result);
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('就业政策')"/>
+    <link th:href="@{/css/home.css}" rel="stylesheet"/>
+</head>
+<body>
+<!--head start-->
+<th:block th:include="header"/><!--head end-->
+<!--轮播 start-->
+<th:block th:include="slideshow"/>
+<!--轮播 end-->
+<!--内容第一行 start-->
+<div class="warp_n">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="title">
+                <span style="font-size: 20px;color: #0A4587">政策</span>
+            </div>
+            <div class="sd-body">
+                <ul>
+                    <li><a href="policy">就业政策</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="title">
+                <span>当前位置：<a href="/home">首页</a>  >  <a href="/policy" οnclick="location.reload()">就业政策</a></span>
+            </div>
+            <div class="select-table table-striped">
+                <div class="ct-b-t" th:utext="${policy.title}" th:src="${policy.src}" target="_blank"></div>
+                <div class="msgbar" th:utext="'发布时间：' + ${releaseTime} + '&nbsp;&nbsp;&nbsp;作者：' +  ${policy.releasePeople}+ '&nbsp;&nbsp;&nbsp;浏览次数：' +  ${policy.visitTimes}"></div>
+                <div style="height: 800px;overflow:auto" th:utext="${policy.content}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容第一行 end-->
+<!--footer start-->
+<th:block th:include="footer"/>
+<!--footer end-->
+</body>
+</html>

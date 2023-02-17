@@ -1,0 +1,366 @@
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+img, ins, kbd, q, s, samp,
+small, strike, strong,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    vertical-align: baselinebaseline;
+    background: transparent;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    font-family: "微软雅黑", arial, helvetica, clean, sans-serif;
+    line-height: 24px;
+    /*background: url(../images/body_bg.jpg) repeat-x #fff;*/
+}
+
+div, span, h1, h2, h3, h4, h5, h6, ul, li, img, p, strong {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+div {
+    overflow: hidden;
+}
+
+ul, ol {
+    list-style-type: none;
+}
+
+ul.decimal {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+input, button, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    vertical-align: middle;
+    border: 1;
+}
+
+img {
+    border: 0;
+    vertical-align: baseline
+}
+
+a {
+    text-decoration: none;
+    color: #585858;
+    cursor: pointer;
+}
+
+.header {
+    width: 100%;
+    height: 120px;
+    background: url(../img/head.png);
+    z-index: 1000;
+}
+
+.headerView {
+    width: 1100px;
+    margin: 0 auto;
+    height: 100px;
+}
+
+.header .logo {
+    float: left;
+    clear: both;
+    margin-left: 20px;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.header .headerTitle {
+    display: block;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+    font-size: 20px;
+    margin-top: 35px;
+    margin-left: 20px;
+    font-family: "microsoft yahei", arial, tahoma, "\5b8b\4f53", sans-serif;
+}
+
+.header .mainNav .nav {
+    float: left;
+    margin-left: 100px;
+    margin-top: 20px;
+    width: 500px;
+}
+
+.header .mainNav .nav li {
+    float: left;
+    width: 80px;
+    text-align: center;
+    font-size: 18px;
+    color: red;
+}
+
+.nav {
+    padding: 0 0px 0 0px;
+    height: 44px;
+    line-height: 44px;
+    position: relative;
+    z-index: 1;
+    padding-top: 2px;
+}
+
+.nav .nLi {
+    float: left;
+    position: relative;
+    display: inline;
+    z-index: 100;
+}
+
+.nav .nLi h3 {
+    float: left;
+    background: url(../img/navs-li.png) left center no-repeat;
+}
+
+.nav .nLi h3 a {
+    display: block;
+    padding: 0 0px;
+    font-size: 15px;
+    color: white;
+    line-height: 44px;
+    font-weight: bold;
+    width: 80px;
+    text-align: center;
+    font-family: "microsoft yahei", arial, tahoma, "\5b8b\4f53", sans-serif;
+}
+
+.warp {
+    width: 1100px;
+    margin: 20px auto;
+}
+
+.warp .index_home_news {
+    float: left;
+    width: 520px;
+    height: 280px;
+}
+
+.warp .index_home_news .title {
+    width: 520px;
+    height: 30px;
+    margin: 0 auto;
+    background: url(../img/index-3.png) 0 bottom no-repeat;
+    position: relative;
+}
+
+.warp .index_home_news .title h1 {
+    float: left;
+    font-size: 18px;
+    color: #0A4587;
+    width: 400px;
+    font-weight: 900;
+}
+
+.warp .index_home_news .title span a {
+    width: 50px;
+    float: right;
+    font-size: 15px;
+    color: #0A4587;
+    margin-right: 20px;
+}
+
+.warp .index_home_news .index_news_con {
+    width: 520px;
+    height: 220px;
+    margin: 10px auto;
+}
+
+.warp .index_home_news .index_news_con ul {
+    float: right;
+    width: 520px;
+}
+
+.warp .index_home_news .index_news_con ul li {
+    float: left;
+    background: url(../img/ico-1.jpg) left no-repeat;
+    padding-left: 10px;
+    width: 520px;
+    margin: 1px 0;
+}
+
+.warp .index_home_news .index_news_con ul li span {
+    color: #a6a7a7;
+    float: right;
+    padding-right: 20px
+}
+
+.warp .index_home_news .index_news_con ul li a {
+    display: block;
+    font-size: 13px;
+    float: left;
+    width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*就业日历*/
+.warp .index_home_date {
+    float: left;
+    width: 520px;
+    height: 380px;
+}
+
+.warp .index_home_date .title {
+    width: 520px;
+    height: 30px;
+    margin: 0 auto;
+    background: url(../img/index-3.png) 0 bottom no-repeat;
+    position: relative;
+}
+
+.warp .index_home_date .title h1 {
+    float: left;
+    font-size: 18px;
+    color: #0A4587;
+    width: 400px;
+    font-weight: 900;
+}
+
+.warp .index_home_date .title span a {
+    width: 50px;
+    float: right;
+    font-size: 15px;
+    color: #0A4587;
+    margin-right: 20px;
+}
+
+.warp .index_home_date .index_date_con {
+    width: 520px;
+    height: 380px;
+    margin: 10px auto;
+}
+
+#test-n1 .layui-laydate-main {
+    width: 480px;
+}
+
+/*日历样式修改START*/
+#test-n1 .layui-laydate-main .layui-laydate-header .laydate-prev-y {
+    display: none;
+}
+
+#test-n1 .layui-laydate-main .layui-laydate-header .laydate-next-y {
+    display: none;
+}
+
+#test-n1 .layui-laydate-content td, #test-n1 .layui-laydate-content th {
+    width: 70px;
+    border-radius: 50%
+}
+
+/*日历样式修改END*/
+.warp_n {
+    width: 1100px;
+    margin: 10px auto;
+}
+
+.warp_n .row .col-sm-3 .title {
+    line-height: 32px;
+    color: #808080;
+    background: url(../img/left-tit.png) 0 bottom no-repeat;
+}
+
+.warp_n .row .col-sm-3 .sd-body ul {
+    padding-top: 0px;
+    margin: 0 auto;
+}
+
+.warp_n .row .col-sm-3 .sd-body ul li {
+    margin-top: 10px;
+}
+
+.warp_n .row .col-sm-3 .sd-body ul li a {
+    display: block;
+    height: 46px;
+    line-height: 46px;
+    font-size: 16px;
+    padding-left: 45px;
+    color: #4A4A4A;
+    background: #F7F7F7
+}
+
+
+.warp_n .row .col-sm-9 .title {
+    line-height: 32px;
+    color: #808080;
+    background: url(../img/dqwz.png) 0 bottom no-repeat;
+}
+
+/*列表部分 START*/
+.search-collapse, .select-table {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, .2);
+    padding-top: 0px;
+
+}
+
+.ct-b-t {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.8;
+    padding-top: 20px;
+    color: #000000;
+    padding-bottom: 10px;
+    text-align: center
+}
+
+.msgbar {
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+#bootstrap-table tbody tr {
+    height: 50px;
+}
+
+.bootstrap-table .fixed-table-toolbar {
+    display: none;
+}
+
+.footer {
+    height: 143px;
+    background: #EEEEEE;
+}
+
+.footer .footer-wrap {
+    width: 1100px;
+    height: 138px;
+    margin: 0 auto;
+}
+
+.footer .foot-info {
+    color: #000000;
+    padding-top: 30px;
+}
+
+.footer .foot-info .info {
+    line-height: 24px;
+    height: 24px;
+}
+
+.footer .foot-info .info span {
+    font-weight: bold;
+}
